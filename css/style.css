@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.grid {
+    background: #000;
+    display: grid;
+    display: -ms-grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    -ms-grid-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper>img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.image-wrapper>.content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    font-size: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, .2);
+    /* background-color: color(display-p3 1 1 0); */
+    /* color:color(display-p3 1 1 0); */
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.image-wrapper>img,
+.image-wrapper>.content {
+    transition: .25s linear;
+    cursor: pointer;
+}
+
+.image-wrapper:hover>img.blur {
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+}
+
+.image-wrapper:hover>img.zoom {
+    transform: scale(1.5);
+}
+
+.image-wrapper:hover>img.grayscale {
+    filter: grayscale(1) blur(20px);
+    -webkit-filter: grayscale(1) blur(20px);
+}
+
+.image-wrapper>.content.fade {
+    opacity: 0;
+}
+
+.image-wrapper:hover>.content.fade {
+    opacity: 1;
+}
+
+.image-wrapper>.content.clip {
+    clip-path: circle(0% at 50% 50%);
+}
+
+.image-wrapper:hover>.content.clip {
+    clip-path: circle(100% at 50% 50%);
+}
+
+.image-wrapper>.content.slide-left {
+    transform: translateX(-100%);
+}
+
+.image-wrapper:hover>.content.slide-left {
+    transform: translateX(0%);
+}
+
+.image-wrapper>.content.slide-right {
+    transform: translateX(100%);
+}
+
+.image-wrapper:hover>.content.slide-right {
+    transform: translateX(0%);
+}
+
+.image-wrapper>.content.slide-top {
+    transform: translateY(-100%);
+}
+
+.image-wrapper:hover>.content.slide-top {
+    transform: translateY(0%);
+}
+
+.image-wrapper>.content.slide-bottom {
+    transform: translateY(100%);
+}
+
+.image-wrapper:hover>.content.slide-bottom {
+    transform: translateY(0%);
+}
