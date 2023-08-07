@@ -4,26 +4,26 @@ const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 
-getUser("bajaj277");
+getUser("meetgovindbajaj");
 
 async function getUser(username) {
-    const resp = await fetch(APIURL + username);
-    const respData = await resp.json();
+  const resp = await fetch(APIURL + username);
+  const respData = await resp.json();
 
-    createUserCard(respData);
+  createUserCard(respData);
 
-    getRepos(username);
+  getRepos(username);
 }
 
 async function getRepos(username) {
-    const resp = await fetch(APIURL + username + "/repos");
-    const respData = await resp.json();
+  const resp = await fetch(APIURL + username + "/repos");
+  const respData = await resp.json();
 
-    addReposToCard(respData);
+  addReposToCard(respData);
 }
 
 function createUserCard(user) {
-    const cardHTML = `
+  const cardHTML = `
         <div class="card">
             <div>
                 <img class="avatar" src="${user.avatar_url}" alt="${user.name}" />
@@ -43,35 +43,35 @@ function createUserCard(user) {
         </div>
     `;
 
-    main.innerHTML = cardHTML;
+  main.innerHTML = cardHTML;
 }
 
 function addReposToCard(repos) {
-    const reposEl = document.getElementById("repos");
+  const reposEl = document.getElementById("repos");
 
-    repos
-        .sort((a, b) => b.stargazers_count - a.stargazers_count)
-        .slice(0, 10)
-        .forEach((repo) => {
-            const repoEl = document.createElement("a");
-            repoEl.classList.add("repo");
+  repos
+    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+    .slice(0, 10)
+    .forEach((repo) => {
+      const repoEl = document.createElement("a");
+      repoEl.classList.add("repo");
 
-            repoEl.href = repo.html_url;
-            repoEl.target = "_blank";
-            repoEl.innerText = repo.name;
+      repoEl.href = repo.html_url;
+      repoEl.target = "_blank";
+      repoEl.innerText = repo.name;
 
-            reposEl.appendChild(repoEl);
-        });
+      reposEl.appendChild(repoEl);
+    });
 }
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const user = search.value;
+  const user = search.value;
 
-    if (user) {
-        getUser(user);
+  if (user) {
+    getUser(user);
 
-        search.value = "";
-    }
+    search.value = "";
+  }
 });
